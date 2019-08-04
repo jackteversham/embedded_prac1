@@ -12,6 +12,33 @@ Date: <dd/mm/yyyy>
 # import Relevant Librares
 import RPi.GPIO as GPIO
 
+global counter
+counter = 0
+
+global values
+values[] = ["000","001","010","011","100", "101","111"]
+
+def increment(channel):
+    global counter
+    if counter==7:
+        counter=0
+    else:
+        counter = counter-1
+
+    GPIO.output(led1, values[counter][0])
+    GPIO.output(led2, values[counter][1])
+    GPIO.output(led3, values[counter][2])
+
+def decrement(channel):
+    global counter
+    if counter==0:
+        counter=7
+    else:
+        counter-=1
+
+GPIO.add_event_detect(button_up, GPIO.FALLING, callback=increment(), bouncetime=300)
+
+
 # Logic that you write
 def main():
     print("write your logic here")
